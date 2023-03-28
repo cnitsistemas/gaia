@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "19a9faff-7934-412a-87a2-d380bed49692"
+      }
+    },
+    "owner": "joaocruz3108"
   }
 }
