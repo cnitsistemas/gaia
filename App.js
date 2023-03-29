@@ -1,29 +1,26 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'react-native';
+import { StatusBar, Text } from 'react-native';
 import Routes from './src/routes';
-import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
-import store from './src/redux/store'
+import { store, persistor } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import { Colors } from 'react-native-ui-lib';
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#ff7a2d',
-    secondary: '#303030',
-  },
-};
+Colors.loadColors({
+  primary: '#ff843a',
+  secondary: '#404040',
+});
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
         <NavigationContainer>
-          <StatusBar backgroundColor={"#ff7a2d"} barStyle="light-content" />
+          <StatusBar backgroundColor={"#ff843a"} barStyle="light-content" />
           <Routes />
         </NavigationContainer>
-      </Provider>
-    </PaperProvider>
+      </PersistGate>
+    </Provider>
   );
 }

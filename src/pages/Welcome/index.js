@@ -4,6 +4,7 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import { IconButton, MD3Colors } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+import { AntDesign } from '@expo/vector-icons'; 
 
 const slides = [
   {
@@ -30,11 +31,11 @@ export default function Welcome() {
   const navigation = useNavigation();
   const [showApp, setShowApp] = useState(false);
 
-  useEffect(() => {
-    if (showApp) {
-      navigation.navigate('SingIn')
-    }
-  }, [showApp])
+  // useEffect(() => {
+  //   if (showApp) {
+  //     navigation.navigate('SingIn')
+  //   }
+  // }, [showApp])
 
   function renderSlides({ index, item }) {
     return <>
@@ -54,11 +55,7 @@ export default function Welcome() {
   _renderNextButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <IconButton
-          icon="arrow-right"
-          iconColor={MD3Colors.error50}
-          size={25}
-        />
+        <AntDesign name="arrowright" size={24} color="black" />
       </View>
     );
   };
@@ -66,11 +63,7 @@ export default function Welcome() {
   _renderPrevButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <IconButton
-          icon="arrow-left"
-          iconColor={MD3Colors.error50}
-          size={25}
-        />
+        <AntDesign name="arrowleft" size={24} color="black" />
       </View>
     );
   };
@@ -78,15 +71,11 @@ export default function Welcome() {
   _renderDoneButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <IconButton
-          icon="check"
-          iconColor={MD3Colors.error50}
-          size={25}
-        />
+        <AntDesign name="check" size={24} color="black" />
       </View>
     );
   };
-  
+
   if (showApp) {
     return navigation.navigate('SingIn');
   } else {
@@ -101,7 +90,7 @@ export default function Welcome() {
         activeDotStyle={{
           backgroundColor: '#ff7a2d'
         }}
-        onDone={() => setShowApp(true)}
+        onDone={() => navigation.navigate('SingIn')}
       />
     </>
 
@@ -130,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     paddingHorizontal: 23,
     fontWeight: "bold",
-    color: "#ff7a2d",
+    color: "#ff843a",
     textAlign: "center"
   },
   subtitle: {
