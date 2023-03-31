@@ -1,23 +1,26 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { getDataStorage } from "../redux/services/asyncStoregeServices";
 
 const withAuthHeader = async (includeHeaderKey = true) => {
-    const value = await AsyncStorage.getItem('auth');
-    const sessionUser = JSON.parse(value)
-    if (sessionUser) {
-        const auth = `${sessionUser.auth.tokenType} ${sessionUser.auth.accessToken}`
-        if (includeHeaderKey) {
-            return {
-                headers: {
+    await getDataStorage('@auth').then((response) =>{
+        if (response) {
+            const auth = `${response.tokenType} ${response.accessToken}`
+            if (includeHeaderKey) {
+                return {
+                    headers: {
+                        Authorization: auth
+                    }
+                }
+            } else {
+                return {
                     Authorization: auth
                 }
             }
-        } else {
-            return {
-                Authorization: auth
-            }
         }
-    }
-    return null;
+        return null;
+    })
+    .catch((e) => {
+        console.log(e)
+    });
 }
 
 export default withAuthHeader;

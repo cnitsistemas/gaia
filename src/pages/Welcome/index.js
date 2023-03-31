@@ -5,6 +5,7 @@ import { IconButton, MD3Colors } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import { AntDesign } from '@expo/vector-icons'; 
+import { customQuicksandFontBoldUI, customQuicksandFontRegularUI } from '../../utils/fontsUi';
 
 const slides = [
   {
@@ -55,7 +56,7 @@ export default function Welcome() {
   _renderNextButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <AntDesign name="arrowright" size={24} color="black" />
+        <AntDesign name="arrowright" size={24} color="#ff843a" />
       </View>
     );
   };
@@ -63,7 +64,7 @@ export default function Welcome() {
   _renderPrevButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <AntDesign name="arrowleft" size={24} color="black" />
+        <AntDesign name="arrowleft" size={24} color="#ff843a" />
       </View>
     );
   };
@@ -71,7 +72,7 @@ export default function Welcome() {
   _renderDoneButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <AntDesign name="check" size={24} color="black" />
+        <AntDesign name="check" size={24} color="#ff843a" />
       </View>
     );
   };
@@ -116,13 +117,14 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   text: {
+    ...customQuicksandFontBoldUI,
     fontSize: 23,
     paddingHorizontal: 23,
-    fontWeight: "bold",
     color: "#ff843a",
     textAlign: "center"
   },
   subtitle: {
+    ...customQuicksandFontRegularUI,
     color: "#a5a5a5",
     paddingLeft: 23,
     paddingRight: 23,

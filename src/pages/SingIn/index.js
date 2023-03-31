@@ -1,13 +1,31 @@
-import { Image, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton';
-import { View, Text, Button } from 'react-native-ui-lib';
+import { View, Text } from 'react-native-ui-lib';
 import * as Animatable from 'react-native-animatable';
+import { connect } from 'react-redux';
+import { login } from './../../redux/actions/auth'
+import { customQuicksandFontBoldUI } from '../../utils/fontsUi';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SingIn() {
+function SingIn(props) {
+  const navigation = useNavigation();
+  const { login } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async ({ email, password }) => {
+    const data = new FormData({ email, password });
+    try {
+      if (email && password) {
+        await login({ email: email, password: password })
+          .then((response) => console.log(response));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <View paddingH-30>
@@ -56,15 +74,14 @@ export default function SingIn() {
           secureTextEntry={true}
           selectionColor="#ff843a"
         />
-
         <CustomButton
           borderRadius={7}
           text70
           white
           background-primary
           enableShadow
-          label="Login"
-          onPress={() => console.log({ email, password })}
+          label="Entrar"
+          onPress={() => navigation.navigate('TabNavigation')}
           style={styles.buttonSubimit}
         />
       </Animatable.View>
@@ -85,17 +102,26 @@ const styles = StyleSheet.create({
     marginBottom: 3
   },
   welcomeText: {
-    fontSize: 28,
-    fontWeight: "bold",
+    ...customQuicksandFontBoldUI,
+    fontSize: 26,
     textAlign: "center"
   },
   welcomeSubtext: {
-    fontSize: 14,
-    fontWeight: "bold",
+    ...customQuicksandFontBoldUI,
+    fontSize: 16,
     textAlign: "center",
     color: "#acacac"
   },
   buttonSubimit: {
-    marginTop: 3
+    marginTop: 3,
+    height: 60,
   }
 });
+
+const mapStateToProps = (state) => {
+  return {};
+}
+
+export default connect(mapStateToProps, {
+  login
+})(SingIn)
