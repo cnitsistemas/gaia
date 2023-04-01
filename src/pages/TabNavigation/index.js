@@ -23,11 +23,11 @@ const TabButton = (props) => {
 
   useEffect(() => {
     if (focused) {
-      viewRef.current.animate({ 0: { scale: .5, rotate: '0deg' }, 1: { scale: 1.5, rotate: '360deg' } });
+      viewRef.current.animate({ 0: { scale: .5 }, 1: { scale: 1.5 } });
     } else {
-      viewRef.current.animate({ 0: { scale: 1.5, rotate: '360deg' }, 1: { scale: 1, rotate: '0deg' } });
+      viewRef.current.animate({ 0: { scale: 1 }, 1: { scale: 1 } });
     }
-  }, [focused])
+  }, [focused, viewRef])
 
   return (
     <TouchableOpacity
@@ -38,7 +38,7 @@ const TabButton = (props) => {
         ref={viewRef}
         duration={1000}
         style={styles.container}>
-        <Icon type={item.type} name={focused ? item.activeIcon : item.inActiveIcon} color={focused ? Colors.primary : Colors.primaryLite} />
+        <Icon type={item.type} name={focused ? item.activeIcon : item.inActiveIcon} color={focused ? Colors.primary : Colors.darkGray} />
       </Animatable.View>
     </TouchableOpacity>
   )

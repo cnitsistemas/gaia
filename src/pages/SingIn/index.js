@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { ActivityIndicator, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton';
@@ -7,28 +7,37 @@ import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { login } from './../../redux/actions/auth'
 import { customQuicksandFontBoldUI } from '../../utils/fontsUi';
-import { useNavigation } from '@react-navigation/native';
+import Colors from '../../constants/Colors';
+import CustomDialog from '../../components/CustomDialog';
 
 function SingIn(props) {
-  const navigation = useNavigation();
   const { login } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
-    const data = new FormData({ email, password });
     try {
+      setIsLoading(true);
       if (email && password) {
         await login({ email: email, password: password })
-          .then((response) => console.log(response));
+          .then(() => setIsLoading(false));
+      } else {
+        setIsLoading(false);
+        handleOpenDialog(true);
       }
     } catch (e) {
       console.log(e);
     }
   };
 
+  const handleOpenDialog = (value) => {
+    setOpenDialog(value);
+  }
+
   return (
-    <View paddingH-30>
+    <View paddingH-40>
       <Animatable.Image
         delay={600}
         animation="fadeInUp"
@@ -60,7 +69,7 @@ function SingIn(props) {
           validationMessage={['Campo requerido', 'Email é invalida']}
           maxLength={30}
           text70
-          selectionColor="#ff843a"
+          selectionColor={Colors.primary}
         />
         <CustomInput
           placeholder={'Senha'}
@@ -72,17 +81,31 @@ function SingIn(props) {
           maxLength={30}
           text70
           secureTextEntry={true}
-          selectionColor="#ff843a"
+          selectionColor={Colors.primary}
         />
-        <CustomButton
-          borderRadius={7}
-          text70
-          white
-          background-primary
-          enableShadow
-          label="Entrar"
-          onPress={() => navigation.navigate('TabNavigation')}
-          style={styles.buttonSubimit}
+        {isLoading ? <ActivityIndicator size="large" color="#c7c7c7" /> :
+          <CustomButton
+            borderRadius={7}
+            text70
+            white
+            background-primary
+            enableShadow
+            label="Entrar"
+            onPress={() => handleSubmit({ email, password })}
+            style={styles.buttonSubimit}
+          />
+        }
+
+        <CustomDialog
+          visible={openDialog}
+          title="Aviso"
+          content="Para seguir é preciso preencher todos os campos!"
+          visibleCancel={false}
+          visibleConfirm={true}
+          textCancel=""
+          textConfirm="Ok entendi"
+          handleCancelButton={() => { }}
+          handleConfirmButton={() => handleOpenDialog(false)}
         />
       </Animatable.View>
     </View>
@@ -92,8 +115,9 @@ function SingIn(props) {
 const styles = StyleSheet.create({
   img: {
     resizeMode: "contain",
-    height: "50%",
-    width: "100%"
+    height: "35%",
+    width: "100%",
+    marginVertical: 50
   },
   form: {
     paddingHorizontal: 30

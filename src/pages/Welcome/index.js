@@ -4,8 +4,10 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import { IconButton, MD3Colors } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons';
 import { customQuicksandFontBoldUI, customQuicksandFontRegularUI } from '../../utils/fontsUi';
+import { setFirstAccess } from '../../redux/actions/ui'
+import { connect } from 'react-redux';
 
 const slides = [
   {
@@ -28,15 +30,8 @@ const slides = [
   },
 ]
 
-export default function Welcome() {
-  const navigation = useNavigation();
-  const [showApp, setShowApp] = useState(false);
-
-  // useEffect(() => {
-  //   if (showApp) {
-  //     navigation.navigate('SingIn')
-  //   }
-  // }, [showApp])
+function Welcome(props) {
+  const { firstAccess, setFirstAccess } = props;
 
   function renderSlides({ index, item }) {
     return <>
@@ -77,9 +72,7 @@ export default function Welcome() {
     );
   };
 
-  if (showApp) {
-    return navigation.navigate('SingIn');
-  } else {
+  if (firstAccess) {
     return (<>
       <AppIntroSlider
         renderItem={renderSlides}
@@ -91,13 +84,23 @@ export default function Welcome() {
         activeDotStyle={{
           backgroundColor: '#ff7a2d'
         }}
-        onDone={() => navigation.navigate('SingIn')}
+        onDone={() => setFirstAccess(false)}
       />
     </>
-
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    firstAccess: state.ui.firstAccess,
+    accessToken: state.auth.auth && state.auth.auth.accessToken || null,
+  };
+}
+
+export default connect(mapStateToProps, {
+  setFirstAccess
+})(Welcome)
 
 const styles = StyleSheet.create({
   buttonCircle: {

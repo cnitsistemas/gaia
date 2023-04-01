@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { mapLoginCreateData } from "../mappers/mapAuth";
+import { mapLoginCreateData } from "../redux/mappers/mapAuth";
 import api from "./apiService";
 import { storeDataStorage } from "./asyncStoregeServices";
-let STORAGE_KEY = '@auth';
+let STORAGE_KEY = 'auth';
 
 const logIn = async (data) => {
   const url = `api/login`;

@@ -19,10 +19,12 @@ export const storeDataStorage = async ({ key, value }) => {
 }
 
 export const getDataStorage = async (key) => {
+    let data = '';
     try {
-      const jsonValue = await AsyncStorage.getItem(key)
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-      // error reading value
+        data = await AsyncStorage.getItem(key) || 'none';
+    } catch (error) {
+        console.log(error);
     }
-  }
+
+    return data != null ? JSON.parse(data) : null;
+}

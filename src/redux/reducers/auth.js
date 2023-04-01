@@ -1,9 +1,6 @@
 import { actionTypes } from "./../actions/auth";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-const auth = AsyncStorage.getItem("auth");
-
-const initialState = auth ? auth : {
+const initialState = {
 	auth: null,
 	signUp: {},
 	requiredAuth: false,

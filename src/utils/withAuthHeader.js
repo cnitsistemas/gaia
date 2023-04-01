@@ -1,4 +1,4 @@
-import { getDataStorage } from "../redux/services/asyncStoregeServices";
+import { getDataStorage } from "../services/asyncStoregeServices";
 
 const withAuthHeader = async (includeHeaderKey = true) => {
     await getDataStorage('@auth').then((response) =>{

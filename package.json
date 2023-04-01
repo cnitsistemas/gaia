@@ -24,6 +24,7 @@
     "react-native": "0.71.4",
     "react-native-animatable": "^1.3.3",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-dialog": "^9.3.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-materialui-textfield": "^0.13.2",
     "react-native-paper": "^5.5.2",
