@@ -3,13 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { Colors, Typography } from 'react-native-ui-lib';
-import {
-  useFonts,
-  NunitoSans_400Regular,
-  NunitoSans_700Bold,
-  NunitoSans_300Light
-} from '@expo-google-fonts/nunito-sans';
-import { Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light } from '@expo-google-fonts/quicksand';
+import { useFonts, Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light } from '@expo-google-fonts/quicksand';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/redux/store';
 import MainApp from './src/app'
@@ -26,9 +20,6 @@ Typography.loadTypographies({
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    NunitoSans_400Regular,
-    NunitoSans_700Bold,
-    NunitoSans_300Light,
     Quicksand_400Regular,
     Quicksand_700Bold,
     Quicksand_300Light

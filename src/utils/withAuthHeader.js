@@ -1,7 +1,7 @@
 import { getDataStorage } from "../services/asyncStoregeServices";
 
 const withAuthHeader = async (includeHeaderKey = true) => {
-    await getDataStorage('@auth').then((response) =>{
+    await getDataStorage('auth').then((response) =>{
         if (response) {
             const auth = `${response.tokenType} ${response.accessToken}`
             if (includeHeaderKey) {

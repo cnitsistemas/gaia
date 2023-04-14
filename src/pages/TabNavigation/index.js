@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useRef } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
 import ColorScreen from '../../screens/ColorScreens';
@@ -9,8 +9,8 @@ import Home from '../Home';
 
 const TabArr = [
   { route: 'Home', label: 'Home', type: Icons.Ionicons, activeIcon: 'home', inActiveIcon: 'home-outline', component: Home },
-  { route: 'Like', label: 'Like', type: Icons.MaterialCommunityIcons, activeIcon: 'heart-plus', inActiveIcon: 'heart-plus-outline', component: ColorScreen },
-  { route: 'Search', label: 'Search', type: Icons.MaterialCommunityIcons, activeIcon: 'timeline-plus', inActiveIcon: 'timeline-plus-outline', component: ColorScreen },
+  { route: 'Chart', label: 'Chart', type: Icons.MaterialCommunityIcons, activeIcon: 'chart-box', inActiveIcon: 'chart-box-outline', component: ColorScreen },
+  { route: 'Search', label: 'Search', type: Icons.Ionicons, activeIcon: 'search', inActiveIcon: 'search-outline', component: ColorScreen },
   { route: 'Account', label: 'Account', type: Icons.FontAwesome, activeIcon: 'user-circle', inActiveIcon: 'user-circle-o', component: ColorScreen },
 ];
 

@@ -8,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { customQuicksandFontBoldUI, customQuicksandFontRegularUI } from '../../utils/fontsUi';
 import { setFirstAccess } from '../../redux/actions/ui'
 import { connect } from 'react-redux';
+import Icon, {Icons} from '../../components/Icons';
 
 const slides = [
   {

@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from '../pages/Welcome';
 import SingIn from '../pages/SingIn';
-import TabNavigation from '../pages/TabNavigation';
+// import TabNavigation from '../pages/TabNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,11 +19,11 @@ export default function Routes(props) {
                 component={SingIn}
                 options={{ headerShown: false }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="TabNavigation"
                 component={TabNavigation}
                 options={{ headerShown: false }}
-            />
+            /> */}
         </Stack.Navigator>
     )
 }
