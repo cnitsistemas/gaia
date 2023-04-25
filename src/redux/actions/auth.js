@@ -6,7 +6,8 @@ export const actionTypes = {
 	SET_LOGIN: 'SET_LOGIN',
 	SET_ACCESS_USER: 'SET_ACCESS_USER',
 	SET_REQUIRED: 'SET_REQUIRED',
-	SET_LOGOUT: 'SET_LOGOUT'
+	SET_LOGOUT: 'SET_LOGOUT',
+	SET_ACCESS_BIOMETRIC: 'SET_ACCESS_BIOMETRIC'
 }
 
 export const setRequiredAuth = (required) => async (dispatch) => {
@@ -44,19 +45,29 @@ export const login = (user) => (dispatch) => {
 	);
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
 	return authServices.logOut().then((response) => {
 		if (response.status === "success") {
+			dispatch(setAccessUser({}));
 			dispatch({
 				type: actionTypes.SET_LOGOUT,
 			});
 			Promise.resolve();
 			return response;
 		}
-	});
+	},
+		(error) => {
+			Promise.reject();
+			return error;
+		});
 };
 
 export const setAccessUser = (value) => ({
 	type: actionTypes.SET_ACCESS_USER,
+	payload: value
+})
+
+export const setBiometricAccessUser = (value) => ({
+	type: actionTypes.SET_ACCESS_BIOMETRIC,
 	payload: value
 })

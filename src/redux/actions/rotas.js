@@ -1,12 +1,12 @@
 import routesServices from "../../services/routesServices";
-
+import { logout } from '../actions/auth'
 export const actionTypes = {
 	SET_ROUTES: 'SET_ROUTES',
 }
 
-export const getRoutes = () => (dispatch) => {
-	return routesServices.getRoutesService().then(
-		(response) => {
+export const getRoutes = () => async (dispatch) => {
+	return routesServices.getRoutesService()
+		.then((response) => {
 			if (response) {
 				dispatch({
 					type: actionTypes.SET_ROUTES,
@@ -15,11 +15,14 @@ export const getRoutes = () => (dispatch) => {
 				Promise.resolve();
 				return response;
 			}
-		},
-		(error) => {
-			const message = error.toString();
-			Promise.reject();
-			return message;
-		}
-	);
+		})
+		.catch(e => {
+			const status = e.response && e.response.status
+
+			if (status === 401) {
+				dispatch(logout())
+			}
+
+			return e
+		})
 };

@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton';
@@ -6,12 +6,11 @@ import { View, Text } from 'react-native-ui-lib';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { login } from './../../redux/actions/auth'
-import { customQuicksandFontBoldUI } from '../../utils/fontsUi';
-import Colors from '../../constants/Colors';
 import CustomDialog from '../../components/CustomDialog';
+import { styles } from './styles';
 
 function SingIn(props) {
-  const { login } = props;
+  const { login, onLayoutRootView } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +36,7 @@ function SingIn(props) {
   }
 
   return (
-    <View paddingH-40 style={styles.main}>
+    <View paddingH-40 style={styles.main} onLayout={onLayoutRootView}>
       <View style={styles.container}><Animatable.Image
         delay={600}
         animation="fadeInUp"
@@ -62,28 +61,20 @@ function SingIn(props) {
           animation="fadeIn">
           <CustomInput
             placeholder={'Email'}
-            floatingPlaceholder={true}
             onChangeText={text => setEmail(text)}
-            enableErrors={true}
-            validate={['required', 'email']}
-            validationMessage={['Campo requerido', 'Email é invalida']}
             maxLength={30}
-            text70
-            selectionColor={Colors.primary}
+            size="md"
           />
           <CustomInput
             placeholder={'Senha'}
-            floatingPlaceholder={true}
             onChangeText={text => setPassword(text)}
-            enableErrors={true}
-            validate={['required', 'password', (value) => value.length > 6]}
-            validationMessage={['Campo requerido', 'Senha é invalida', 'Password is too short']}
             maxLength={30}
-            text70
-            secureTextEntry={true}
-            selectionColor={Colors.primary}
+            size="md"
+            type="password"
           />
-          {isLoading ? <ActivityIndicator size="large" color="#c7c7c7" /> :
+          {isLoading ? <View style={styles.buttonLoading}>
+            <ActivityIndicator size="large" color="#c7c7c7" />
+          </View> :
             <CustomButton
               borderRadius={7}
               text70
@@ -112,44 +103,6 @@ function SingIn(props) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  main: {
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center'
-  },
-  container:{
-    flex: 1,
-  },
-  img: {
-    resizeMode: "contain",
-    height: "25%",
-    width: "100%",
-    marginBottom: 50
-  },
-  form: {
-    paddingHorizontal: 30
-  },
-  welcomeContainer: {
-    marginBottom: 3
-  },
-  welcomeText: {
-    ...customQuicksandFontBoldUI,
-    fontSize: 26,
-    textAlign: "center"
-  },
-  welcomeSubtext: {
-    ...customQuicksandFontBoldUI,
-    fontSize: 16,
-    textAlign: "center",
-    color: "#acacac"
-  },
-  buttonSubimit: {
-    marginTop: 3,
-    height: 60,
-  }
-});
 
 const mapStateToProps = (state) => {
   return {};

@@ -1,32 +1,30 @@
+import { Input, Stack } from 'native-base';
 import React from 'react';
 import { TextField } from 'react-native-ui-lib';
 
 export default function CustomInput(props) {
-    const { 
-        validate, 
-        validationMessage, 
-        maxLength, 
-        onChangeText, 
-        enableErrors, 
-        placeholder, 
+    const {
+        validate,
+        validationMessage,
+        maxLength,
+        onChangeText,
+        enableErrors,
+        placeholder,
+        size,
         floatingPlaceholder,
         secureTextEntry = false,
         selectionColor
     } = props;
 
     return (
-        <TextField
-            placeholder={placeholder}
-            floatingPlaceholder={floatingPlaceholder}
-            onChangeText={onChangeText}
-            enableErrors={enableErrors}
-            validate={validate}
-            validationMessage={validationMessage}
-            maxLength={maxLength}
-            style={{ height: 40, width: "100%", borderColor: 'gray', borderBottomWidth: 1, borderBottomColor: "#ff843a" }}
-            secureTextEntry={secureTextEntry}
-            selectionColor={selectionColor}
-            {...props}
-        />
+        <Stack space={2} w="100%" maxW="350px" mx="auto" style={{ marginVertical: 8 }}>
+            <Input
+                variant="underlined"
+                placeholder={placeholder}
+                size={size}
+                onChangeText={onChangeText}
+                {...props}
+            />
+        </Stack>
     );
 };

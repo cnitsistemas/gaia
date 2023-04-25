@@ -1,6 +1,7 @@
 export const mapLoginCreateData = (data) => {
 	return {
 		name: data['user_name'],
+		avatar: data['avatar'],
 		email: data['user_email'],
 		success: data['success'],
 		accessToken: data['access_token'],

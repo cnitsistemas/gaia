@@ -4,7 +4,6 @@ import SingIn from '../pages/SingIn';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStack(props) {
-    console.log(props);
     return (
         <Stack.Navigator>
             <Stack.Screen

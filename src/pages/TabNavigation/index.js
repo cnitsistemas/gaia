@@ -1,17 +1,20 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useRef } from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
 import ColorScreen from '../../screens/ColorScreens';
 import * as Animatable from 'react-native-animatable';
 import Home from '../Home';
+import Notice from '../Notice';
+import Account from '../Account';
+import { styles } from './styles';
 
 const TabArr = [
   { route: 'Home', label: 'Home', type: Icons.Ionicons, activeIcon: 'home', inActiveIcon: 'home-outline', component: Home },
-  { route: 'Chart', label: 'Chart', type: Icons.MaterialCommunityIcons, activeIcon: 'chart-box', inActiveIcon: 'chart-box-outline', component: ColorScreen },
-  { route: 'Search', label: 'Search', type: Icons.Ionicons, activeIcon: 'search', inActiveIcon: 'search-outline', component: ColorScreen },
-  { route: 'Account', label: 'Account', type: Icons.FontAwesome, activeIcon: 'user-circle', inActiveIcon: 'user-circle-o', component: ColorScreen },
+  { route: 'Chart', label: 'Chart', type: Icons.MaterialCommunityIcons, activeIcon: 'chart-box', inActiveIcon: 'chart-box-outline', component: Notice },
+  { route: 'Search', label: 'Search', type: Icons.Ionicons, activeIcon: 'search', inActiveIcon: 'search-outline', component: Notice },
+  { route: 'Account', label: 'Account', type: Icons.FontAwesome, activeIcon: 'user-circle', inActiveIcon: 'user-circle-o', component: Account },
 ];
 
 const Tab = createBottomTabNavigator();
@@ -72,11 +75,3 @@ export default function AnimTab1() {
     </Tab.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})

@@ -5,6 +5,7 @@ const initialState = {
 	signUp: {},
 	requiredAuth: false,
 	methodAccess: null,
+	biometricAccess: false,
 }
 
 const AuthReducer = (state = initialState, action) => {
@@ -14,6 +15,15 @@ const AuthReducer = (state = initialState, action) => {
 			newState = {
 				...state,
 				auth: action.payload,
+			};
+
+			break;
+		}
+
+		case actionTypes.SET_ACCESS_BIOMETRIC: {
+			newState = {
+				...state,
+				biometricAccess: action.payload,
 			};
 
 			break;

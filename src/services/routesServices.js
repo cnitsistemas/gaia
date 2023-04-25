@@ -9,7 +9,6 @@ const getRoutesService = async () => {
   const auth = JSON.parse(item)
   const token = auth && auth.accessToken
 
-  console.log(token)
   const url = `api/rotas`;
   const result = await api.get(url, {
     headers:{

@@ -1,9 +1,11 @@
 import React from 'react'
 import Dialog from "react-native-dialog";
 import Colors from '../../constants/Colors';
+import { Button, Modal, VStack, HStack, Text } from "native-base";
 
 export default function CustomDialog({
     visible,
+    setVisible,
     title,
     content,
     visibleCancel,
@@ -11,16 +13,27 @@ export default function CustomDialog({
     textCancel,
     textConfirm,
     handleCancelButton,
-    handleConfirmButton
+    handleConfirmButton,
+    size, 
+    closeOnOverlayClick
 }) {
     return (
-        <Dialog.Container visible={visible}>
-            <Dialog.Title>{title}</Dialog.Title>
-            <Dialog.Description>
-                {content}
-            </Dialog.Description>
-            {visibleCancel && <Dialog.Button color={Colors.primary} label={textCancel} onPress={handleCancelButton} />}
-            {visibleConfirm && <Dialog.Button color={Colors.primary} label={textConfirm} onPress={handleConfirmButton} />}
-        </Dialog.Container>
+        <Modal isOpen={visible} onClose={() => setVisible()} size={size} closeOnOverlayClick={closeOnOverlayClick}>
+            <Modal.Content maxWidth="350" >
+                <Modal.CloseButton />
+                <Modal.Header>{title}</Modal.Header>
+                <Modal.Body>
+                    {content}
+                </Modal.Body>
+                <Modal.Footer>
+                    {visibleCancel && <Button flex="1" onPress={handleCancelButton}>
+                        {textCancel}
+                    </Button>}
+                    {visibleConfirm && <Button flex="1" onPress={handleConfirmButton}>
+                        {textConfirm}
+                    </Button>}
+                </Modal.Footer>
+            </Modal.Content>
+        </Modal>
     )
 }

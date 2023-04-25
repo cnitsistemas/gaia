@@ -1,14 +1,11 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, Text, Image } from 'react-native';
+import React from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { IconButton, MD3Colors } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import { AntDesign } from '@expo/vector-icons';
-import { customQuicksandFontBoldUI, customQuicksandFontRegularUI } from '../../utils/fontsUi';
 import { setFirstAccess } from '../../redux/actions/ui'
 import { connect } from 'react-redux';
-import Icon, {Icons} from '../../components/Icons';
+import { styles } from './styles';
 
 const slides = [
   {
@@ -101,37 +98,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   setFirstAccess
-})(Welcome)
-
-const styles = StyleSheet.create({
-  buttonCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  img: {
-    resizeMode: "cover",
-    height: "70%",
-    width: "100%"
-  },
-  text: {
-    ...customQuicksandFontBoldUI,
-    fontSize: 23,
-    paddingHorizontal: 23,
-    color: "#ff843a",
-    textAlign: "center"
-  },
-  subtitle: {
-    ...customQuicksandFontRegularUI,
-    color: "#a5a5a5",
-    paddingLeft: 23,
-    paddingRight: 23,
-    textAlign: "center"
-  }
-});
+})(Welcome);

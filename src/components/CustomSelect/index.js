@@ -15,7 +15,7 @@ export default function CustomSelect(props) {
                         setSelectedItems(itemValue)
                     }>
                     {items && items.length > 0 && items.map(item => {
-                        return <Picker.Item key={item.id} label={item.nome} value={item.id} />
+                        return <Picker.Item key={item.id} label={item.nome} value={item} />
                     })}
                 </Picker>
             </View>
@@ -29,14 +29,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     lebel: {
-        ...customQuicksandFontBoldUI,
+        // ...customQuicksandFontBoldUI,
         fontSize: 14,
+        marginLeft: 15,
         color: "#acacac"
     },
     select: {
-        marginTop: 10,  
+        marginBottom: 10,  
         borderColor: '#ff843a',
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         borderBottomLeftRadius: 5,

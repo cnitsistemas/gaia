@@ -19,7 +19,8 @@ const logIn = async (data) => {
 };
 
 const logOut = async () => {
-  AsyncStorage.clear();
+  await storeDataStorage({ key: STORAGE_KEY, value: {} });
+
   return {
     status: "success",
     message: "You are logged out",

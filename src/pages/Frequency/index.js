@@ -1,97 +1,195 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import CustomSelect from '../../components/CustomSelect';
-import { getRoutes } from '../../redux/actions/rotas';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import CustomDatePicker from '../../components/CustomDatePicker';
 import CustomButton from '../../components/CustomButton';
+import moment from 'moment';
+import { createFrequency } from '../../redux/actions/frequency';
+import { HStack, VStack, useToast } from 'native-base';
+import CustomDialog from '../../components/CustomDialog';
+import Loading from '../../components/Loading';
+import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import CustomDatePicker from '../../components/CustomDatePicker';
+import CustomSelect from '../../components/CustomSelect';
+import ToastAlert from '../../components/Toast';
 
 const turno = [
-    {
-        id: 'Manhã',
-        nome: 'Manhã',
-    },
-    {
-        id: 'Tader',
-        nome: 'Tader',
-    },
-    {
-        id: 'Noite',
-        nome: 'Noite',
-    }
+    { id: 'Manhã', nome: 'Manhã' },
+    { id: 'Tader', nome: 'Tader' },
+    { id: 'Noite', nome: 'Noite' }
+]
+
+const itemSense = [
+    { id: 'Ida', nome: 'Ida' },
+    { id: 'Volta', nome: 'Volta' },
 ]
 
 function Frequency(props) {
-    const { getRoutes, routes } = props;
-    const [selectedRouter, setSelectedRouter] = useState();
-    const [selectedTurno, setSelectedTurno] = useState();
-    const [selectDate, setSelectDate] = useState(null);
+    const { createFrequency, selectedRoute } = props;
+    const navigation = useNavigation();
+    const toast = useToast();
+    const [selectedTurno, setSelectedTurno] = useState(null);
+    const [selectDate, setSelectDate] = useState(new Date());
+    const [selectSense, setSelectSense] = useState(null);
+    const [selectHours, setSelectHours] = useState(null);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [screenLoading, setScreenLoading] = useState(false);
+    const [isVisibleDialog, setIsVisibleDialog] = useState(false);
 
     useState(() => {
-        getRoutes();
+        setScreenLoading(true);
+        setSelectedTurno(turno[0]);
+        setSelectSense(itemSense[0]);
+
+        setTimeout(() => {
+            setScreenLoading(false);
+        }, 1000)
     }, [])
+
+    const showToast = (item) => {
+        toast.show({
+            duration: 3000,
+            placement: "top",
+            render: ({
+                id: id
+            }) => {
+                return <ToastAlert id={id} {...item} />;
+            }
+        })
+    }
+
+    const handleCreateFrequency = () => {
+        setIsVisibleDialog(false);
+        setIsLoading(true);
+        const data = {
+            rota_id: selectedRoute && selectedRoute.id,
+            turno: selectedTurno && selectedTurno.nome,
+            data_chamada: moment(selectDate).format(),
+            realizada: 0,
+            sentido: selectSense && selectSense.id,
+            horario: moment(selectHours).format("HH:mm"),
+        }
+
+        createFrequency(data).then((response) => {
+            setIsLoading(false);
+            if (response.success) {
+                showToast({
+                    id: 'create-frequency',
+                    title: "Frequência criada",
+                    status: 'success',
+                    variant: "solid",
+                    description: "Frequência cadastrada com sucesso!",
+                    isClosable: true
+                });
+                setTimeout(() => {
+                    navigation.navigate('PerformFrequency')
+                }, 2000);
+            } else {
+                showToast({
+                    id: 'error-frequency',
+                    title: "Falha no cadastro",
+                    status: 'error',
+                    variant: "solid",
+                    description:
+                        (response.message || "A rota selecionada não possui alunos cadastrados ou não possui alunos para o horário escolido."),
+                    isClosable: true
+                });
+            }
+        })
+            .catch((e) => console.log(e));
+    };
 
     return (
         <View style={styles.container}>
-            <CustomDatePicker
-                label="Data da Frequência:"
-                selectDate={selectDate}
-                setSelectDate={setSelectDate}
-                isDatePickerVisible={isDatePickerVisible}
-                setDatePickerVisibility={setDatePickerVisibility}
+            {screenLoading ? <Loading /> : <>
+                <View style={styles.description}>
+                    <Text style={styles.textDescription}>Ao criar uma frequência você estabelece informações importantes para a criação do fluxo de chamadas dos alunos
+                        . Baseado em informações como Data, horário, rota e turno, é possivel listar os alunos que irão participar da realização da frequência. </Text>
+                </View>
+                <View>
+                    <Text style={styles.dateLebel}>Rota Selecionada</Text>
+                    <Text style={styles.route}>{selectedRoute && selectedRoute.name}</Text>
+                    <Text style={styles.dateLebel}>Data da frequência</Text>
+                    <Text style={styles.date}>{moment(selectDate).format('DD/MM/YYYY')}</Text>
+                    <CustomDatePicker
+                        label="Horario:"
+                        selectDate={selectHours}
+                        setSelectDate={setSelectHours}
+                        isDatePickerVisible={isDatePickerVisible}
+                        setDatePickerVisibility={setDatePickerVisibility}
+                    />
+                    <CustomSelect
+                        label="Sentido:"
+                        items={itemSense}
+                        selectedItems={selectSense}
+                        setSelectedItems={setSelectSense}
+                    />
+                    <CustomSelect
+                        label="Turno:"
+                        items={turno}
+                        selectedItems={selectedTurno}
+                        setSelectedItems={setSelectedTurno}
+                    />
+                </View>
+                <View style={styles.action}>
+                    {isLoading ? <ActivityIndicator size="large" color="#c7c7c7" /> :
+                        <CustomButton
+                            borderRadius={7}
+                            label="CRIAR FREQUÊNCIA"
+                            onPress={() => setIsVisibleDialog(true)}
+                            style={styles.buttonSubimit}
+                            isDisabled={!selectHours}
+                        />}
+                </View>
+            </>
+            }
+            <CustomDialog
+                visible={isVisibleDialog}
+                setVisible={setIsVisibleDialog}
+                title={`Confirmar dados da frequência`}
+                content={<>
+                    <VStack space={3}>
+                        <HStack alignItems="center" justifyContent="space-between">
+                            <Text fontWeight="medium">Data</Text>
+                            <Text color="blueGray.400">{moment(selectDate).format('DD/MM/YYYY')}</Text>
+                        </HStack>
+                        <HStack alignItems="center" justifyContent="space-between">
+                            <Text fontWeight="medium">Horário</Text>
+                            <Text color="blueGray.400">{moment(selectHours).format('HH:mm')}</Text>
+                        </HStack>
+                        <HStack alignItems="center" justifyContent="space-between">
+                            <Text fontWeight="medium">Sentido</Text>
+                            <Text color="blueGray.400">{selectSense && selectSense.nome}</Text>
+                        </HStack>
+                        <HStack alignItems="center" justifyContent="space-between">
+                            <Text fontWeight="medium">Rota</Text>
+                            <Text color="blueGray.400" style={{ maxWidth: 200, textAlign: 'justify' }}>{selectedRoute && selectedRoute.name}</Text>
+                        </HStack>
+                        <HStack alignItems="center" justifyContent="space-between">
+                            <Text fontWeight="medium">Turno</Text>
+                            <Text color="green.500">{selectedTurno && selectedTurno.nome}</Text>
+                        </HStack>
+                    </VStack></>}
+                visibleCancel={false}
+                visibleConfirm={true}
+                textCancel={``}
+                textConfirm={`Confirmar`}
+                handleCancelButton={() => setIsVisibleDialog(false)}
+                handleConfirmButton={() => handleCreateFrequency()}
+                size={'lg'}
+                closeOnOverlayClick={false}
             />
-            <CustomSelect
-                label="Rota:"
-                items={routes}
-                selectedItems={selectedRouter}
-                setSelectedItems={setSelectedRouter}
-            />
-            <CustomSelect
-                label="Turno:"
-                items={turno}
-                selectedItems={selectedTurno}
-                setSelectedItems={setSelectedTurno}
-            />
-
-            {isLoading ? <ActivityIndicator size="large" color="#c7c7c7" /> :
-                <CustomButton
-                    borderRadius={7}
-                    text70
-                    white
-                    background-primary
-                    enableShadow
-                    label="Salvar"
-                    onPress={() => console.log('Chamada')}
-                    style={styles.buttonSubimit}
-                />}
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 10
-    },
-    button: {
-        backgroundColor: '#8B93A5',
-        padding: 10,
-        borderRadius: 6,
-        marginTop: 50,
-    },
-    buttonSubimit: {
-        marginTop: 3,
-        height: 60,
-    }
-});
-
 const mapStateToProps = (state) => {
     return {
-        routes: state.routes && state.routes.routes || null
+        selectedRoute: state.frequency && state.frequency.selectedRoute || {}
     };
 }
 
 export default connect(mapStateToProps, {
-    getRoutes
+    createFrequency
 })(Frequency)

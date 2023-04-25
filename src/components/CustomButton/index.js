@@ -1,20 +1,23 @@
 
+import { Button } from 'native-base';
 import React from 'react';
-import { Button } from 'react-native-ui-lib';
 
 export default function CustomButton(props) {
     const {
         label,
         onPress,
-        borderRadius
+        borderRadius,
+        color = "primary"
     } = props;
 
     return (
         <Button
             borderRadius={borderRadius}
-            label={label}
             onPress={onPress}
+            colorScheme={color}
             {...props}
-        />
+        >
+            {label}
+        </Button>
     );
 };

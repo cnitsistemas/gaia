@@ -1,8 +1,7 @@
 import moment from "moment/moment";
-import React, { useState } from "react";
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { customQuicksandFontBoldUI } from "../../utils/fontsUi";
 
 export default function CustomDatePicker(props) {
     const { label, selectDate, setSelectDate, isDatePickerVisible, setDatePickerVisibility } = props;
@@ -16,19 +15,20 @@ export default function CustomDatePicker(props) {
     };
 
     const handleConfirm = (date) => {
+        hideDatePicker();
         setSelectDate(date)
-        //hideDatePicker();
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.lebel}>{label}</Text>
             <Pressable style={styles.selectPicker} onPress={() => showDatePicker()}>
-                {selectDate ? <Text style={styles.value}>{moment(selectDate).format("DD/MM/YYYY")}</Text> : <Text style={styles.value}>Selecione uma data</Text>}
+                {selectDate ? <Text style={styles.value}>{moment(selectDate).format("HH:mm")}</Text> :
+                    <Text style={styles.value}>Selecione uma data</Text>}
             </Pressable>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
-                mode="date"
+                mode="time"
                 date={new Date()}
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
@@ -42,20 +42,20 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
-    value:{
+    value: {
         fontSize: 16,
         padding: 15
     },
     lebel: {
-        ...customQuicksandFontBoldUI,
         fontSize: 14,
+        marginLeft: 15,
         color: "#acacac"
     },
     selectPicker: {
-        marginTop: 10,  
+        marginBottom: 10,
         height: 55,
         borderColor: '#ff843a',
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         borderBottomLeftRadius: 5,
