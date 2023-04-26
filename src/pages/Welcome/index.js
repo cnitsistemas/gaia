@@ -11,19 +11,19 @@ const slides = [
   {
     key: '1',
     title: 'Bem-vindo ao Sistema de Frequência Escolar do CNIT',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum, nibh vel lobortis tempor, ipsum odio dignissim elit, non placerat purus odio sit amet urna.',
+    subtitle: 'A CNIT é uma pioneira na região com serviços de transporte de escolar com inovação tecnológica. Garantindo o acesso à educação e a informação.',
     image: require('../../../assets/slides/slide1.png'),
   },
   {
     key: '2',
     title: 'Realização de gestão e frequência de Alunos',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum, nibh vel lobortis tempor, ipsum odio dignissim elit, non placerat purus odio sit amet urna.',
+    subtitle: 'Realize chamada de frenquentar de alunos no transporte escolar, acesse as informações dos alunos por rota.',
     image: require('../../../assets/slides/slide2.png'),
   },
   {
     key: '3',
     title: 'Cadastro e gerenciamento de rotas',
-    subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum, nibh vel lobortis tempor, ipsum odio dignissim elit, non placerat purus odio sit amet urna.',
+    subtitle: 'Cadastre e gerencie as informações da rota, com geolocalização de ponto de partida, ponto de chegada e seus respectivos horários.',
     image: require('../../../assets/slides/slide3.png'),
   },
 ]

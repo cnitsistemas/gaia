@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { Colors, Typography } from 'react-native-ui-lib';
-import { useFonts, Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light } from '@expo-google-fonts/quicksand';
+import { useFonts, Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light, Quicksand_500Medium } from '@expo-google-fonts/quicksand';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/redux/store';
 import MainApp from './src/app'

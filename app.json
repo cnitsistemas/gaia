@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.joaocruz3108.cnitapp"
     },
     "android": {
       "adaptiveIcon": {
