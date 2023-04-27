@@ -151,23 +151,23 @@ function Frequency(props) {
                 content={<>
                     <VStack space={3}>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text fontWeight="medium">Data</Text>
-                            <Text color="blueGray.400">{moment(selectDate).format('DD/MM/YYYY')}</Text>
+                            <Text style={styles.textDialogLabel}>Data</Text>
+                            <Text style={styles.textDialog}>{moment(selectDate).format('DD/MM/YYYY')}</Text>
                         </HStack>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text fontWeight="medium">Horário</Text>
-                            <Text color="blueGray.400">{moment(selectHours).format('HH:mm')}</Text>
+                            <Text style={styles.textDialogLabel}>Horário</Text>
+                            <Text style={styles.textDialog}>{moment(selectHours).format('HH:mm')}</Text>
                         </HStack>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text fontWeight="medium">Sentido</Text>
-                            <Text color="blueGray.400">{selectSense && selectSense.nome}</Text>
+                            <Text style={styles.textDialogLabel}>Sentido</Text>
+                            <Text style={styles.textDialog}>{selectSense && selectSense.nome}</Text>
                         </HStack>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text fontWeight="medium">Rota</Text>
-                            <Text color="blueGray.400" style={{ maxWidth: 200, textAlign: 'justify' }}>{selectedRoute && selectedRoute.name}</Text>
+                            <Text style={styles.textDialogLabel}>Rota</Text>
+                            <Text style={styles.textDialog}>{selectedRoute && selectedRoute.name}</Text>
                         </HStack>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text fontWeight="medium">Turno</Text>
+                            <Text style={styles.textDialogLabel}>Turno</Text>
                             <Text color="green.500">{selectedTurno && selectedTurno.nome}</Text>
                         </HStack>
                     </VStack></>}

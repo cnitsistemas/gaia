@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { customQuicksandFontBoldUI, customQuicksandFontMediumUI } from "../../utils/fontsUi";
 
 export const styles = StyleSheet.create({
     container: {
@@ -36,7 +37,8 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 5,
         marginTop: 10,
         marginBottom: 10,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingBottom: 10,
     },
     headerDialog: {
         fontSize: 15,
@@ -71,12 +73,21 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 10
     },
-    textDescription:{
+    textDescription: {
+        ...customQuicksandFontMediumUI,
         textAlign: 'justify',
         fontSize: 14,
-        color: Colors.accent,
-    }, 
-    textSlide:{
+        color: Colors.clearBlack,
+    },
+    textDialog: {
+        maxWidth: 200,
+        textAlign: 'right',
+        ...customQuicksandFontMediumUI,
+    },
+    textDialogLabel: {
+        ...customQuicksandFontBoldUI
+    },
+    textSlide: {
         textAlign: 'center',
         fontSize: 16,
         color: Colors.red,

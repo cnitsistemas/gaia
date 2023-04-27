@@ -105,7 +105,7 @@ function ChooseRoute(props) {
                 content={<>
                     <VStack space={3}>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Text color="blueGray.400">{selectedRouter && selectedRouter.name}</Text>
+                            <Text style={styles.textDialog}>{selectedRouter && selectedRouter.name}</Text>
                         </HStack>
                     </VStack></>}
                 visibleCancel={false}

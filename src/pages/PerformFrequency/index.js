@@ -59,7 +59,7 @@ function PerformFrequency(props) {
                     status: 'success',
                     variant: "solid",
                     description: "Frequência realizada com sucesso!",
-                    isClosable: true
+                    isClosable: false
                 });
             }, 2000);
         })

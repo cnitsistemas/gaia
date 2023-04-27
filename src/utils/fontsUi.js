@@ -17,3 +17,7 @@ export const customQuicksandFontRegularUI = {
 export const customQuicksandFontLightUI = {
     fontFamily: 'Quicksand_300Light',
 }
+
+export const customQuicksandFontMediumUI = {
+    fontFamily: 'Quicksand_500Medium',
+}

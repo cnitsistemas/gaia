@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { customQuicksandFontMediumUI } from "../../utils/fontsUi";
 
 export const styles = StyleSheet.create({
     container: {
@@ -58,9 +59,13 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 10
     },
-    textDescription:{
+    textDescription: {
+        ...customQuicksandFontMediumUI,
         textAlign: 'justify',
         fontSize: 14,
-        color: Colors.accent,
-    }, 
+        color: Colors.clearBlack,
+    },
+    textDialog: {
+        ...customQuicksandFontMediumUI,
+    }
 });
