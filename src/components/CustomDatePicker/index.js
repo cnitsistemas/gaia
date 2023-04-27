@@ -24,7 +24,7 @@ export default function CustomDatePicker(props) {
             <Text style={styles.lebel}>{label}</Text>
             <Pressable style={styles.selectPicker} onPress={() => showDatePicker()}>
                 {selectDate ? <Text style={styles.value}>{moment(selectDate).format("HH:mm")}</Text> :
-                    <Text style={styles.value}>Selecione uma data</Text>}
+                    <Text style={styles.value}>Selecione um horário</Text>}
             </Pressable>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}

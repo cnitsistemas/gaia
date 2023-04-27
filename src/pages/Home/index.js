@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Image } from 'react-native';
 import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
-// import { clearStorage } from '../../services/asyncStoregeServices';
 import { API_URL } from '../../../config';
 import { styles } from './styles';
 
@@ -18,7 +17,7 @@ function Home(props) {
             viewRef.current.fadeInUp()
         })
         return () => unsubscribe;
-    }, [navigation, viewRef])
+    }, [navigation, viewRef]);
     return (
         <View style={Styles.container}>
             <Animatable.View

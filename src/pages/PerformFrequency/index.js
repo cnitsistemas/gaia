@@ -55,7 +55,7 @@ function PerformFrequency(props) {
             setTimeout(() => {
                 showToast({
                     id: 'test',
-                    title: "Frequência realizada",
+                    title: "Frequência realizada!",
                     status: 'success',
                     variant: "solid",
                     description: "Frequência realizada com sucesso!",

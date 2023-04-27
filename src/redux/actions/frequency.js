@@ -51,7 +51,16 @@ export const getDataFrequency = ({ id }) => (dispatch) => {
 			Promise.reject();
 			return error;
 		}
-	);
+	)
+		.catch(e => {
+			const status = e.response && e.response.status
+
+			if (status === 401) {
+				dispatch(logout())
+			}
+
+			return e
+		});
 };
 
 export const makeFrequency = (data) => (dispatch) => {

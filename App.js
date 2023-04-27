@@ -7,7 +7,7 @@ import { useFonts, Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light, 
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/redux/store';
 import MainApp from './src/app'
-import { AxiosInterceptor } from './src/services/apiService';
+// import { AxiosInterceptor } from './src/services/apiService';
 import Toast from 'react-native-toast-message';
 import { NativeBaseProvider, extendTheme } from "native-base";
 import Entypo from '@expo/vector-icons/Entypo';
@@ -55,7 +55,8 @@ export default function App() {
   let [fontsLoaded] = useFonts({
     Quicksand_400Regular,
     Quicksand_700Bold,
-    Quicksand_300Light
+    Quicksand_300Light,
+    Quicksand_500Medium
   });
 
   useEffect(() => {
@@ -91,7 +92,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <AxiosInterceptor store={store}>
           <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
             <NativeBaseProvider theme={theme}>
               <StatusBar backgroundColor={"#ff843a"} barStyle="light-content" />
@@ -99,7 +99,6 @@ export default function App() {
               <Toast />
             </NativeBaseProvider>
           </PersistGate>
-        </AxiosInterceptor>
       </Provider>
     </NavigationContainer>
   );

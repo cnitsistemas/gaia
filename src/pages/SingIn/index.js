@@ -1,5 +1,5 @@
 import { ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton';
 import { View, Text } from 'react-native-ui-lib';
@@ -8,20 +8,51 @@ import { connect } from 'react-redux';
 import { login } from './../../redux/actions/auth'
 import CustomDialog from '../../components/CustomDialog';
 import { styles } from './styles';
+import ToastAlert from '../../components/Toast';
+import { useToast } from 'native-base';
 
 function SingIn(props) {
   const { login, onLayoutRootView } = props;
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+
+  const showToast = (item) => {
+    toast.show({
+      duration: 5000,
+      placement: "top",
+      render: ({
+        id: id
+      }) => {
+        return <ToastAlert id={id} {...item} />;
+      }
+    })
+  }
 
   const handleSubmit = async ({ email, password }) => {
     try {
       setIsLoading(true);
       if (email && password) {
         await login({ email: email, password: password })
-          .then(() => setIsLoading(false));
+          .then((response) => {
+            console.log(response)
+            if (response && !response.success) {
+              showToast({
+                id: 'error-login',
+                title: "Falha no Login!",
+                status: 'error',
+                variant: "solid",
+                description:
+                  (response.message || "Erro ao realizar o login do usuario. Usuário ou senha incorretos."),
+                isClosable: false
+              });
+              setIsLoading(false);
+            } else {
+              setIsLoading(false);
+            }
+          })
       } else {
         setIsLoading(false);
         handleOpenDialog(true);
@@ -33,7 +64,7 @@ function SingIn(props) {
 
   const handleOpenDialog = (value) => {
     setOpenDialog(value);
-  }
+  };
 
   return (
     <View paddingH-40 style={styles.main} onLayout={onLayoutRootView}>

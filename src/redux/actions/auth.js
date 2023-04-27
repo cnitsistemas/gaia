@@ -1,5 +1,3 @@
-import { mapLoginCreateData } from "../mappers/mapAuth";
-import withAuthHeader from "../../utils/withAuthHeader";
 import authServices from "../../services/authServices";
 
 export const actionTypes = {
@@ -27,22 +25,22 @@ export const setLogin = (login) => async (dispatch) => {
 export const login = (user) => (dispatch) => {
 	return authServices.logIn(user).then(
 		(response) => {
-			if (response.success) {
+			if (response && response.success) {
 				dispatch(setAccessUser(response));
 				dispatch({
 					type: actionTypes.SET_LOGIN,
 					payload: response,
 				});
-				Promise.resolve();
-				return response;
 			}
+			Promise.resolve();
+			return response;
 		},
 		(error) => {
-			const message = error.toString();
 			Promise.reject();
-			return message;
+			return error;
 		}
-	);
+	)
+		.catch((e) => { console.warn(e) })
 };
 
 export const logout = () => async (dispatch) => {

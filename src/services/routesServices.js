@@ -5,9 +5,9 @@ let STORAGE_KEY = 'routes';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getRoutesService = async () => {
-  const item = await AsyncStorage.getItem('auth')
-  const auth = JSON.parse(item)
-  const token = auth && auth.accessToken
+  const item = await AsyncStorage.getItem('auth');
+  const auth = JSON.parse(item);
+  const token = auth && auth.accessToken;
 
   const url = `api/rotas`;
   const result = await api.get(url, {
@@ -18,7 +18,7 @@ const getRoutesService = async () => {
 
   const mappedResult = mapFetchRoutersResponse(result.data.data);
 
-  if (mappedResult.success) {
+  if (mappedResult && mappedResult.success) {
     await storeDataStorage({ key: STORAGE_KEY, value: mappedResult });
 
     return mappedResult;

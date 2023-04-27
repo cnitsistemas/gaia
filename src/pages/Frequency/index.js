@@ -76,11 +76,11 @@ function Frequency(props) {
             if (response.success) {
                 showToast({
                     id: 'create-frequency',
-                    title: "Frequência criada",
+                    title: "Frequência criada!",
                     status: 'success',
                     variant: "solid",
                     description: "Frequência cadastrada com sucesso!",
-                    isClosable: true
+                    isClosable: false
                 });
                 setTimeout(() => {
                     navigation.navigate('PerformFrequency')
@@ -88,12 +88,12 @@ function Frequency(props) {
             } else {
                 showToast({
                     id: 'error-frequency',
-                    title: "Falha no cadastro",
+                    title: "Falha no cadastro!",
                     status: 'error',
                     variant: "solid",
                     description:
                         (response.message || "A rota selecionada não possui alunos cadastrados ou não possui alunos para o horário escolido."),
-                    isClosable: true
+                    isClosable: false
                 });
             }
         })
