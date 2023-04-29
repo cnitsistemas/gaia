@@ -6,6 +6,7 @@ const initialState = {
 	requiredAuth: false,
 	methodAccess: null,
 	biometricAccess: false,
+	credentials: null
 }
 
 const AuthReducer = (state = initialState, action) => {
@@ -28,6 +29,15 @@ const AuthReducer = (state = initialState, action) => {
 
 			break;
 		}
+		case actionTypes.SET_CREDENTIALS: {
+			newState = {
+				...state,
+				credentials: action.payload,
+			};
+
+			break;
+		}
+
 
 		default: {
 			newState = state;

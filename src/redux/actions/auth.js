@@ -5,13 +5,14 @@ export const actionTypes = {
 	SET_ACCESS_USER: 'SET_ACCESS_USER',
 	SET_REQUIRED: 'SET_REQUIRED',
 	SET_LOGOUT: 'SET_LOGOUT',
-	SET_ACCESS_BIOMETRIC: 'SET_ACCESS_BIOMETRIC'
+	SET_ACCESS_BIOMETRIC: 'SET_ACCESS_BIOMETRIC',
+	SET_CREDENTIALS: 'SET_CREDENTIALS'
 }
 
-export const setRequiredAuth = (required) => async (dispatch) => {
+export const setCredentials = (credentials) => async (dispatch) => {
 	dispatch({
-		type: actionTypes.SET_REQUIRED,
-		payload: required
+		type: actionTypes.SET_CREDENTIALS,
+		payload: credentials
 	})
 }
 
@@ -27,6 +28,7 @@ export const login = (user) => (dispatch) => {
 		(response) => {
 			if (response && response.success) {
 				dispatch(setAccessUser(response));
+				dispatch(setCredentials(user));
 				dispatch({
 					type: actionTypes.SET_LOGIN,
 					payload: response,
@@ -47,6 +49,7 @@ export const logout = () => async (dispatch) => {
 	return authServices.logOut().then((response) => {
 		if (response.status === "success") {
 			dispatch(setAccessUser({}));
+			dispatch(setCredentials(null));
 			dispatch({
 				type: actionTypes.SET_LOGOUT,
 			});

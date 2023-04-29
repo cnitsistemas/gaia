@@ -1,5 +1,5 @@
 import { ActivityIndicator } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton';
 import { View, Text } from 'react-native-ui-lib';
@@ -37,7 +37,6 @@ function SingIn(props) {
       if (email && password) {
         await login({ email: email, password: password })
           .then((response) => {
-            console.log(response)
             if (response && !response.success) {
               showToast({
                 id: 'error-login',

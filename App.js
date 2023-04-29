@@ -92,13 +92,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store={store}>
-          <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
-            <NativeBaseProvider theme={theme}>
-              <StatusBar backgroundColor={"#ff843a"} barStyle="light-content" />
-              <MainApp />
-              <Toast />
-            </NativeBaseProvider>
-          </PersistGate>
+        <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+          <NativeBaseProvider theme={theme}>
+            <StatusBar backgroundColor={"#ff843a"} barStyle="light-content" />
+            <MainApp />
+            <Toast />
+          </NativeBaseProvider>
+        </PersistGate>
       </Provider>
     </NavigationContainer>
   );

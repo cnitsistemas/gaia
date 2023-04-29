@@ -5,11 +5,25 @@ import AuthStack from '../navigation/AuthStack';
 import AppStack from '../navigation/AppStack';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { Alert } from 'react-native';
-import { setBiometricAccessUser } from '../redux/actions/auth';
+import { login, logout, setBiometricAccessUser } from '../redux/actions/auth';
 
 function MainApp(props) {
-	const { firstAccess, accessToken, biometricAccess, setBiometricAccessUser } = props;
+	const { firstAccess, accessToken, biometricAccess, setBiometricAccessUser, logout, login, credentials } = props;
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+	useEffect(() => {
+		async function initAuthentication() {
+			logout();
+			setIsAuthenticated(false);
+		}
+
+		if (!biometricAccess) {
+			initAuthentication();
+		} else {
+			login({ email: credentials.email, password: credentials.password })
+				.then(() => setIsAuthenticated(true))
+		}
+	}, []);
 
 	async function verifyAvailabeAuthentication() {
 		const compatible = await LocalAuthentication.hasHardwareAsync();
@@ -53,7 +67,7 @@ function MainApp(props) {
 	else if (!biometricAccess) {
 		if (!accessToken) return <AuthStack {...props} />
 		else return <AppStack {...props} />
-	} else if (!accessToken && !biometricAccess) return <AuthStack {...props} />
+	} else if (!accessToken || !isAuthenticated) return <AuthStack {...props} />
 	else return <AppStack {...props} />
 }
 
@@ -62,11 +76,14 @@ const mapStateToProps = (state) => {
 		firstAccess: state.ui.firstAccess,
 		accessToken: state.auth.auth && state.auth.auth.accessToken || null,
 		biometricAccess: state.auth && state.auth.biometricAccess || false,
+		credentials: state.auth && state.auth.credentials || null
 	};
 }
 
 export default connect(
 	mapStateToProps, {
-	setBiometricAccessUser
+	setBiometricAccessUser,
+	logout,
+	login
 }
 )(MainApp)
