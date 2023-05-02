@@ -19,6 +19,7 @@
       "bundleIdentifier": "com.joaocruz3108.cnitapp"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ff7a2d"
@@ -34,6 +35,23 @@
         "projectId": "19a9faff-7934-412a-87a2-d380bed49692"
       }
     },
-    "owner": "joaocruz3108"
+    "owner": "joaocruz3108",
+    "plugins": [
+      "@react-native-firebase/app",
+      "@notifee/react-native",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.0"
+          }
+        }
+      ]
+    ]
   }
 }

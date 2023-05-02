@@ -6,6 +6,7 @@ import PerformFrequency from '../pages/PerformFrequency';
 import Privacy from '../pages/Privacy';
 import Terms from '../pages/Terms';
 import ChooseRoute from '../pages/ChooseRoute';
+import Notifications from '../pages/Notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -82,6 +83,20 @@ export default function Routes(props) {
                       backgroundColor: '#fff',
                     },
                     headerTintColor: '#ff843a',
+                    headerTitleStyle: {
+                        ...customQuicksandFontBoldUI,
+                    },
+                  }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{
+                    title: 'Notificações',
+                    headerStyle: {
+                      backgroundColor: '#ff843a',
+                    },
+                    headerTintColor: '#fff',
                     headerTitleStyle: {
                         ...customQuicksandFontBoldUI,
                     },

@@ -67,18 +67,11 @@ function SingIn(props) {
 
   return (
     <View paddingH-40 style={styles.main} onLayout={onLayoutRootView}>
-      <View style={styles.container}><Animatable.Image
-        delay={600}
-        animation="fadeInUp"
-        key={`image-logo-singin`}
-        source={require('../../../assets/logo-sisfa.png')}
-        style={styles.img}
-      />
-        <Animatable.View
-          delay={600}
-          animation="fadeIn"
-          style={styles.welcomeContainer}
-        >
+      <View style={styles.container}>
+        <Animatable.Image delay={600} animation="fadeInUp" key={`image-logo-singin`}
+          source={require('../../../assets/logo-sisfa.png')} style={styles.img}
+        />
+        <Animatable.View delay={600} animation="fadeIn" style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>
             Seja muito bem-vindo!
           </Text>

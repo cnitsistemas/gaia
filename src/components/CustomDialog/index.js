@@ -1,7 +1,5 @@
-import React from 'react'
-import Dialog from "react-native-dialog";
-import Colors from '../../constants/Colors';
-import { Button, Modal, VStack, HStack, Text } from "native-base";
+import React from 'react';
+import { Button, Modal } from "native-base";
 
 export default function CustomDialog({
     visible,
@@ -18,7 +16,7 @@ export default function CustomDialog({
     closeOnOverlayClick
 }) {
     return (
-        <Modal isOpen={visible} onClose={() => setVisible()} size={size} closeOnOverlayClick={closeOnOverlayClick}>
+        <Modal isOpen={visible} onClose={() => setVisible(false)} size={size} closeOnOverlayClick={closeOnOverlayClick}>
             <Modal.Content maxWidth="350" >
                 <Modal.CloseButton />
                 <Modal.Header>{title}</Modal.Header>

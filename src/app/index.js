@@ -11,19 +11,19 @@ function MainApp(props) {
 	const { firstAccess, accessToken, biometricAccess, setBiometricAccessUser, logout, login, credentials } = props;
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	useEffect(() => {
-		async function initAuthentication() {
-			logout();
-			setIsAuthenticated(false);
-		}
+	// useEffect(() => {
+	// 	async function initAuthentication() {
+	// 		logout();
+	// 		setIsAuthenticated(false);
+	// 	}
 
-		if (!biometricAccess) {
-			initAuthentication();
-		} else {
-			login({ email: credentials.email, password: credentials.password })
-				.then(() => setIsAuthenticated(true))
-		}
-	}, []);
+	// 	if (!biometricAccess) {
+	// 		initAuthentication();
+	// 	} else {
+	// 		login({ email: credentials.email, password: credentials.password })
+	// 			.then(() => setIsAuthenticated(true))
+	// 	}
+	// }, []);
 
 	async function verifyAvailabeAuthentication() {
 		const compatible = await LocalAuthentication.hasHardwareAsync();
