@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import CustomSelect from '../../components/CustomSelect';
 import ToastAlert from '../../components/Toast';
+import { onDisplayNotification } from '../../services/notificationServices';
 
 const turno = [
     { id: 'Manhã', nome: 'Manhã' },
@@ -74,14 +75,21 @@ function Frequency(props) {
         createFrequency(data).then((response) => {
             setIsLoading(false);
             if (response.success) {
-                showToast({
+                onDisplayNotification({
                     id: 'create-frequency',
-                    title: "Frequência criada!",
-                    status: 'success',
-                    variant: "solid",
-                    description: "Frequência cadastrada com sucesso!",
-                    isClosable: false
-                });
+                    title: '<strong>Frequência criada!</strong>📋',
+                    body: 'Frequência cadastrada com sucesso!',
+                    press: {
+                        id: 'open-notifications',
+                        launchActivity: 'default',
+                    },
+                    channel: {
+                        id: 'frequency',
+                        name: 'Frequency',
+                        vibration: true,
+                        importance: 'high',
+                    }
+                })
                 setTimeout(() => {
                     navigation.navigate('PerformFrequency')
                 }, 2000);

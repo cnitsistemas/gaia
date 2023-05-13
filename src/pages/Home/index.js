@@ -8,7 +8,8 @@ import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
 import { API_URL } from '../../../config';
 import { styles } from './styles';
-import notifee, { AndroidImportance } from '@notifee/react-native';
+import notifee, { EventType } from '@notifee/react-native';
+import { onDisplayNotification } from '../../services/notificationServices';
 
 function Home(props) {
     const { navigation, userName, avatar } = props;
@@ -21,31 +22,18 @@ function Home(props) {
         return () => unsubscribe;
     }, [navigation, viewRef]);
 
-    async function onDisplayNotification() {
-        // Request permissions (required for iOS)
-        await notifee.requestPermission()
-
-        // Create a channel (required for Android)
-        const channelId = await notifee.createChannel({
-            id: 'notifications',
-            name: 'Frequency Notification',
-            vibration: true,
-            importance: AndroidImportance.HIGH
+    useEffect(() => {
+        return notifee.onForegroundEvent(({ type, detail }) => {
+            switch (type) {
+                case EventType.DISMISSED:
+                    console.log('User dismissed notification', detail.notification);
+                    break;
+                case EventType.PRESS:
+                    console.log('User pressed notification', detail.notification);
+                    break;
+            }
         });
-
-        // Display a notification
-        await notifee.displayNotification({
-            title: 'Notification Title',
-            body: 'Main body content of the notification',
-            android: {
-                channelId,
-                // pressAction is needed if you want the notification to open the app when pressed
-                pressAction: {
-                    id: 'default',
-                },
-            },
-        });
-    }
+    }, []);
     return (
         <View style={Styles.container}>
             <Animatable.View
@@ -66,13 +54,28 @@ function Home(props) {
                         /> : <Image
                             key={`image-logo-user`}
                             source={{
-                                uri: `${API_URL}users/${avatar}`,
+                                uri: `${avatar}`,
                             }}
                             style={styles.img}
                         />}
                     </View>
-                    {/* <Button title={'Notificação'} onPress={onDisplayNotification} /> */}
                 </View>
+                <Button title={'Notificação'} onPress={() => onDisplayNotification({
+                    id: 'create-notification-1',
+                    title: 'Olá, João!',
+                    body: 'Apenas um teste de notificação no app',
+                    press: {
+                        id: 'open-notifications',
+                        launchActivity: 'default',
+                    },
+                    channel: {
+                        id: 'notifications',
+                        name: 'notifications',
+                        vibration: true,
+                        importance: 'high',
+                    }
+                })} />
+
                 <View style={styles.containerActions}>
                     <Pressable style={styles.actions} onPress={() =>
                         navigation.navigate('ChooseRoute')

@@ -113,7 +113,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.cnit"
+    namespace 'com.joaocruz3108.cnitapp'
     defaultConfig {
         applicationId 'com.joaocruz3108.cnitapp'
         minSdkVersion rootProject.ext.minSdkVersion

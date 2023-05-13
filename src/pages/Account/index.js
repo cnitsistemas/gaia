@@ -44,7 +44,7 @@ function Account(props) {
                             alt='image-logo-user'
                             key={`image-logo-user`}
                             source={{
-                                uri: `${API_URL}users/${avatar}`,
+                                uri: `${avatar}`,
                             }}
                             style={styles.img}
                         />}
