@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Image } from 'react-native';
 import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
-import { API_URL } from '../../../config';
 import { styles } from './styles';
 import notifee, { EventType } from '@notifee/react-native';
 import { onDisplayNotification } from '../../services/notificationServices';
