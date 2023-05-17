@@ -83,7 +83,7 @@ function Home(props) {
                         <Icon type={Icons.Ionicons} name='clipboard' color="white" size={40} />
                         <Text style={styles.textActions}>Frequências</Text>
                     </Pressable>
-                    <Pressable style={styles.actionsDisable} onPress={() => navigation.navigate('Notifications')}>
+                    <Pressable style={styles.actionsDisable} onPress={() => {}}>
                         <Icon type={Icons.Ionicons} name='map' color="white" size={40} />
                         <Text style={styles.textActions}>Rotas</Text>
                     </Pressable>
