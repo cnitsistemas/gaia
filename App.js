@@ -1,52 +1,58 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar, Text, View } from 'react-native';
-import { Provider } from 'react-redux';
-import { Colors, Typography } from 'react-native-ui-lib';
-import { useFonts, Quicksand_400Regular, Quicksand_700Bold, Quicksand_300Light, Quicksand_500Medium } from '@expo-google-fonts/quicksand';
-import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from './src/redux/store';
-import MainApp from './src/app'
+import React, { useCallback, useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { Colors, Typography } from "react-native-ui-lib";
+import {
+  useFonts,
+  Quicksand_400Regular,
+  Quicksand_700Bold,
+  Quicksand_300Light,
+  Quicksand_500Medium,
+} from "@expo-google-fonts/quicksand";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./src/redux/store";
+import MainApp from "./src/app";
 // import { AxiosInterceptor } from './src/services/apiService';
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 import { NativeBaseProvider, extendTheme } from "native-base";
-import Entypo from '@expo/vector-icons/Entypo';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import Entypo from "@expo/vector-icons/Entypo";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 SplashScreen.preventAutoHideAsync();
 
 Colors.loadColors({
-  primary: '#ff843a',
-  secondary: '#404040',
+  primary: "#32386f",
+  secondary: "#ff843a",
 });
 
 Typography.loadTypographies({
-  h1: { fontSize: 58, fontWeight: '300', lineHeight: 80 },
-  h2: { fontSize: 46, fontWeight: '300', lineHeight: 64 },
+  h1: { fontSize: 58, fontWeight: "300", lineHeight: 80 },
+  h2: { fontSize: 46, fontWeight: "300", lineHeight: 64 },
 });
 
 const theme = extendTheme({
   colors: {
     primary: {
-      "50": "#ffffff",
-      "100": "#fff8f3",
-      "200": "#ffdbc4",
-      "300": "#ffbe95",
-      "400": "#ffa167",
-      "500": "#f99151",
-      "600": "#f0823d",
-      "700": "#e6732c",
-      "800": "#d36623",
-      "900": "#b35c27"
+      50: "#6d77d6",
+      100: "#5460c6",
+      200: "#444faf",
+      300: "#3f478c",
+      400: "#32386f",
+      500: "#2f345c",
+      600: "#2b2e49",
+      700: "#252738",
+      800: "#1e1f27",
+      900: "#151519",
     },
     amber: {
-      400: '#d97706'
-    }
+      400: "#d97706",
+    },
   },
   config: {
-    initialColorMode: 'light'
-  }
+    initialColorMode: "light",
+  },
 });
 
 export default function App() {
@@ -56,14 +62,14 @@ export default function App() {
     Quicksand_400Regular,
     Quicksand_700Bold,
     Quicksand_300Light,
-    Quicksand_500Medium
+    Quicksand_500Medium,
   });
 
   useEffect(() => {
     async function prepare() {
       try {
         await Font.loadAsync(Entypo.font);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -82,8 +88,7 @@ export default function App() {
     if (appIsReady) {
       hide();
     }
-
-  }, [appIsReady])
+  }, [appIsReady]);
 
   if (!appIsReady || !fontsLoaded) {
     return null;
@@ -94,7 +99,7 @@ export default function App() {
       <Provider store={store}>
         <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
           <NativeBaseProvider theme={theme}>
-            <StatusBar backgroundColor={"#ff843a"} barStyle="light-content" />
+            <StatusBar backgroundColor={"#32386f"} barStyle="light-content" />
             <MainApp />
             <Toast />
           </NativeBaseProvider>

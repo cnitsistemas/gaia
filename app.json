@@ -9,11 +9,9 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ff7a2d"
+      "backgroundColor": "#32386f"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.joaocruz3108.cnitapp"
@@ -22,7 +20,7 @@
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ff7a2d"
+        "backgroundColor": "#32386f"
       },
       "package": "com.joaocruz3108.cnitapp",
       "versionCode": 3
