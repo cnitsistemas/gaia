@@ -118,8 +118,8 @@ android {
         applicationId 'com.joaocruz3108.cnitapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 5
+        versionName "1.1.0"
     }
 
     splits {
