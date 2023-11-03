@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#32386f"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.joaocruz3108.cnitapp"
@@ -23,7 +25,7 @@
         "backgroundColor": "#32386f"
       },
       "package": "com.joaocruz3108.cnitapp",
-      "versionCode": 5
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/favicon.png"

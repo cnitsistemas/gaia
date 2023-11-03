@@ -97,7 +97,7 @@ function ChooseRoute(props) {
                 maxHeight: "70%",
               }}
               items={routes}
-              defaultIndex={2}
+              defaultIndex={0}
               placeholder="Selecione a rota"
               resetValue={false}
               underlineColorAndroid="transparent"

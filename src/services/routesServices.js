@@ -9,15 +9,16 @@ const getRoutesService = async () => {
   const auth = JSON.parse(item);
   const token = auth && auth.accessToken;
 
-  const url = `api/rotas`;
+  const url = `api/rota-all`;
   const result = await api.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   const response = result.data;
+  console.log(response);
 
-  const mappedResult = mapFetchRoutersResponse(response.data.data);
+  const mappedResult = mapFetchRoutersResponse(response.data);
 
   if (mappedResult && mappedResult.success) {
     await storeDataStorage({ key: STORAGE_KEY, value: mappedResult });
