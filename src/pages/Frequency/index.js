@@ -71,9 +71,13 @@ function Frequency(props) {
       observacao: "",
     };
 
+    // console.log(data);
+
     createFrequency(data)
       .then((response) => {
         setIsLoading(false);
+
+        console.log(response);
         if (response.success) {
           onDisplayNotification({
             id: "create-frequency",
